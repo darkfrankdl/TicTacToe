@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace InterfaceAdapterLayer
 {
-    public interface IGame
+    public class DTOPlayer
     {
-        DTOPlayer CreatePlayer(string name);
-        int MakeMove(DTOPlayer currentPlayer, int wantedPlayerMove);
+        public DTOPlayer(string name)
+        {
+            Name = name;
+        }
+        public string Name { get; set; }
     }
 }
