@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace InterfaceAdapterLayer
 {
-    internal interface IGame
+    public interface IGame
     {
+        bool Player1(string name);
+        bool Player2(string name);
     }
 }
