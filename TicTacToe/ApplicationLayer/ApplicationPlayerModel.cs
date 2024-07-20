@@ -4,14 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InterfaceAdapterLayer
+namespace ApplicationLayer
 {
-    internal class DTOPlayer
+    public class ApplicationPlayerModel
     {
-        public DTOPlayer(string name)
-        {
-            Name = name;
-        }
         public string Name { get; set; }
         public int Player1Or2 { get; set; }
     }

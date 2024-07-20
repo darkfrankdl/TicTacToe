@@ -6,17 +6,75 @@ namespace program
 
         public static void Main (string[] args)
         {
-            Game game = new Game();
-            DTOPlayer player1 = game.CreatePlayer("CrossPlayer");
-            DTOPlayer player2 = game.CreatePlayer("CirclePlayer");
+            string playerName = PlayerInput(true);
+            string playerNumber = PlayerInput(false, true);
+            int number = int.Parse(playerNumber);
+            InterfaceAdapter interfaceAdapter = new InterfaceAdapter();
+            bool sus = interfaceAdapter.CreatePlayer(playerName, number);
+            Console.WriteLine($"Creating a player was a sucess: {sus})");
+            Console.ReadLine();
+        }
 
-            drawBoard(game.Board);
+        private static string PlayerInput (bool isPlayerNameInput = false, bool isPlayerNumberInput = false)
+        {
+            bool goon = true;
+            string input = string.Empty;
+            string forText = string.Empty;
 
-            game.MakeMove(player1, 2);
-            game.MakeMove(player2, 3);
-            game.MakeMove(player1, 3);
+            if (isPlayerNameInput)
+            {
+                Console.WriteLine("What is this player's name");
+                forText = "name";
+            }
+            else if (isPlayerNumberInput)
+            {
+                Console.WriteLine("Is this player, player 1 or 2?, type 1 for player 1 or 2 for player 2");
+                forText = "number: either 1 or 2";
+            }
 
-            drawBoard(game.Board);
+            if(isPlayerNameInput && !isPlayerNumberInput || !isPlayerNameInput && isPlayerNumberInput)
+            {
+                while (goon)
+                {
+                    input = Console.In.ReadLine();
+                    if (input != null && input != string.Empty)
+                    {
+                        if (!isPlayerNameInput && isPlayerNumberInput)
+                        {
+                            if (input == "1" || input == "2")
+                            {
+                                goon = false;
+                            }
+                            else if (input != "1" || input != "2")
+                            {
+                                ErrorMessage(forText);
+                            }
+                        }
+                        else
+                        {
+                            goon = false;
+                        }
+                    }
+                    else
+                    {
+                        input = string.Empty;
+                        ErrorMessage(forText);
+                    }
+                }
+            }
+            return input;
+        }
+
+        private static void ErrorMessage (string forText)
+        {
+            Console.WriteLine($"Give {forText} please: ... ");
+        }
+
+        private static int SetIfPlayerIsPlayer1Or2 ()
+        {
+            string playerNumber = Console.In.ReadLine();
+            int number = int.Parse(playerNumber);
+            return -1;
         }
 
         private static void drawBoard (string[] boardStatus)
@@ -29,58 +87,6 @@ namespace program
             Console.WriteLine($"|{boardStatus[3]}|{boardStatus[4]}|{boardStatus[5]}|");
 
             Console.WriteLine($"|{boardStatus[6]}|{boardStatus[7]}|{boardStatus[8]}|");
-        }
-    }
-
-    class Game : IGame
-    {
-        public Game()
-        {
-            Board = new string[9];
-        }
-
-        public DTOPlayer CreatePlayer(string name)
-        {
-            return new DTOPlayer(name);
-        }
-
-        public string [] Board { get; set; }
-        public int MakeMove(DTOPlayer currentPlayer, int wantedPlayerMove)
-        {
-            int placementOfMoveOnBoard = -1;
-            if (wantedPlayerMove >= 1 && wantedPlayerMove <= 9)
-            {
-                string allowedLetterForMove = string.Empty;
-                if (currentPlayer != null && currentPlayer.Name == "CrossPlayer")
-                {
-                    allowedLetterForMove = "X";
-                }
-                else if (currentPlayer.Name == "CirclePlayer")
-                {
-                    allowedLetterForMove = "O";
-                }
-
-                if (Board[wantedPlayerMove - 1] == null)
-                {
-                    Board[wantedPlayerMove - 1] = allowedLetterForMove;
-                    placementOfMoveOnBoard = wantedPlayerMove - 1;
-                }
-                else
-                {
-                    Console.WriteLine("Move not legal as there is a piece already");
-                    Console.WriteLine("the borad is divided into numbers that is");
-                    Console.WriteLine("1,2,3");
-                    Console.WriteLine("4,5,6");
-                    Console.WriteLine("7,8,9");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Error move is out of the board, allowed placements are 1 - 9");
-
-            }
-
-            return placementOfMoveOnBoard;
         }
     }
 }
