@@ -9,6 +9,7 @@ namespace InterfaceAdapterLayer
 {
     public class InterfaceAdapter
     {
+
         public InterfaceAdapter()
         {
 
@@ -23,8 +24,7 @@ namespace InterfaceAdapterLayer
                 playerDto.Player1Or2 = number;
 
                 ApplicationPlayerModel player = DTOModelConverter.DTOToApplicationPlayer(playerDto);
-                ApplicationGame appGame = new ApplicationGame();
-                appGame.CreatePlayer(player);
+                ApplicationGame.PlayerInfo(player);
                 success = true;
             }
             catch (Exception ex)

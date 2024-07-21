@@ -10,7 +10,7 @@ namespace Domain.ValueObject
     {
         public Player2(string name)
         {
-            name = Name;
+             Name= name;
         }
 
         public string Name { get; set; }
