@@ -22,15 +22,14 @@ namespace InterfaceAdapterLayer
                 DTOPlayer playerDto = new DTOPlayer(name);
                 playerDto.Player1Or2 = number;
 
-                ApplicationPlayerModel player = DTOToDomainModelConverter.DTOToApplicationPlayer(playerDto);
+                ApplicationPlayerModel player = DTOModelConverter.DTOToApplicationPlayer(playerDto);
                 ApplicationGame appGame = new ApplicationGame();
                 appGame.CreatePlayer(player);
                 success = true;
             }
             catch (Exception ex)
             {
-                Exception exception = new Exception("Error in creating player, check name or number");
-                Console.WriteLine(exception.Message);
+                ex = new Exception("Error in creating player, check name or number");
             }
            return success;
 

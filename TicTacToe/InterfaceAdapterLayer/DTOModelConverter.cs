@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceAdapterLayer
 {
-    internal class DTOToDomainModelConverter
+    internal class DTOModelConverter
     {
         public static ApplicationPlayerModel DTOToApplicationPlayer (DTOPlayer dtoPlayer)
         {
