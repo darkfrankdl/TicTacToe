@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceAdapterLayer
 {
-    internal class DTOPlayer
+    public class DTOPlayer
     {
         public DTOPlayer(string name)
         {

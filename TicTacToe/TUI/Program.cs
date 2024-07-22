@@ -1,4 +1,5 @@
 ﻿using InterfaceAdapterLayer;
+using System.Runtime.CompilerServices;
 namespace program
 {
     class Program
@@ -12,34 +13,46 @@ namespace program
         private static void Gameflow ()
         {
             Console.WriteLine("*****************Welcome to TicTacToe*****************");
-            Console.WriteLine("select 1 to play a single game");
+            //Console.WriteLine("select 1 to play a single game");
+            Console.WriteLine("select 1 -> create players, first player one then player 2");
 
-
-            string inputFromUser = Console.In.ReadLine();
-            if (inputFromUser != null && inputFromUser != string.Empty)
+            bool goon = true;
+            while (goon)
             {
-                int switchInput = int.Parse(inputFromUser);
-
-                switch(switchInput)
+                string inputFromUser = Console.In.ReadLine();
+                if (inputFromUser != null && inputFromUser != string.Empty)
                 {
-                    case 1: // playing a single game
+                    int switchInput = int.Parse(inputFromUser);
 
-                        // player 1
-                        int playerNumber1 = PlayerNumber();
-                        string playerName1 = PlayerName();
-                        MakeAPlayer(playerName1, playerNumber1);
+                    switch (switchInput)
+                    {
+                        case 1:
 
-                        // player 2
-                        int playerNumber2 = PlayerNumber();
-                        string playerName2 = PlayerName();
-                        MakeAPlayer(playerName2, playerNumber2);
+                            // player 1
+                            int playerNumber1 = PlayerNumber();
+                            string playerName1 = PlayerName();
+                            MakeAPlayer(playerName1, playerNumber1);
+
+                            // player 2
+                            int playerNumber2 = PlayerNumber();
+                            string playerName2 = PlayerName();
+                            MakeAPlayer(playerName2, playerNumber2);
 
 
-                        drawBoard(new string[9]);
+                            drawBoard(new string[9]);
 
-                        break;
+                            break;
+                        case 2:
+                            GamePlaying();
+                            break;
+                        case 0:
+                            goon = false;
+
+                            break;
+                    }
                 }
             }
+            
             
         }
 
@@ -107,6 +120,19 @@ namespace program
             return numberForPlayer;
         }
 
+        public static void GamePlaying ()
+        {
+            bool goon = true;
+            InterfaceAdapter adf = new InterfaceAdapter();
+            while (goon)
+            {
+                // game logic here:
+                // first player 1 makes a move then player 2 makes a move until all spaces are used
+                // or 3 crosses or circles in any line is made 
+
+                DTOPlayer player1 = adf.GetPlayer(1);
+            }
+        }
         private static void drawBoard (string[] boardStatus)
         {
             

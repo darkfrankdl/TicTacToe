@@ -24,15 +24,21 @@ namespace InterfaceAdapterLayer
                 playerDto.Player1Or2 = number;
 
                 ApplicationPlayerModel player = DTOModelConverter.DTOToApplicationPlayer(playerDto);
+                // send data to the ApplicationLayer
                 ApplicationGame.PlayerInfo(player);
-                success = true;
+
+                success = true; // status on player Creation
             }
             catch (Exception ex)
             {
                 ex = new Exception("Error in creating player, check name or number");
             }
            return success;
+        }
 
+        public DTOPlayer GetPlayer (int playerNumber)
+        {
+            return DTOModelConverter.ApplcationPlayerToDTO(ApplicationGame.GetPlayerInfo(playerNumber));
         }
     }
 }

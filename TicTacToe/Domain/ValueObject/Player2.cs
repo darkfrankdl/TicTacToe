@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.ValueObject
 {
-    internal class Player2
+    public class Player2
     {
         public Player2(string name)
         {

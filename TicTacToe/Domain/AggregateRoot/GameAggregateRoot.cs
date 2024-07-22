@@ -14,7 +14,7 @@ namespace Domain.AggregateRoot
             Game = new Game();
         }
 
-        internal Game Game { get; private set; }
+        public Game Game { get; private set; }
 
         public void CreatePlayer(string playerName, int playerNumber)
         {

@@ -3,14 +3,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Domain.Entity
 {
-    internal class Game
+    public class Game
     {
         private Player1 _player1;
         private Player2 _player2;
+
+        public Player1 Player1 
+        { 
+            get
+            {
+                return _player1;
+            }
+        }
+
+        public Player2 Player2
+        {
+            get
+            {
+                return _player2;
+            }
+        }
+
+
         internal void CreatePlayer(string playerName, int playerNumber)
         {
             if(playerNumber == 1)
