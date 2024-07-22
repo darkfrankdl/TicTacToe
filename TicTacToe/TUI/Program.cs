@@ -4,6 +4,7 @@ namespace program
 {
     class Program
     {
+        static string[] board = new string[9];
 
         public static void Main (string[] args)
         {
@@ -95,26 +96,18 @@ namespace program
         private static int PlayerNumber ()
         {
             Console.WriteLine("Game consist of two players, select 1 for player 1 and 2 for player 2");
-            int numberForPlayer = -1;
             bool goon = true;
+            int numberForPlayer = -1;
             while (goon)
             {
-                try
+                numberForPlayer = ParseNumberFromUserInput();
+                if (numberForPlayer == null && numberForPlayer != 1 && numberForPlayer != 2)
                 {
-                    string playerNumber = Console.In.ReadLine();
-                    numberForPlayer = int.Parse(playerNumber);
-                    if (numberForPlayer != 1 && numberForPlayer != 2)
-                    {
-                        Console.WriteLine("Give a number of 1 or 2... try again");
-                    }
-                    else
-                    {
-                        goon = false;
-                    }
+                    Console.WriteLine("Give a number of 1 or 2... try again");
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine(e.Message);
+                    goon = false;
                 }
             }
             return numberForPlayer;
@@ -122,17 +115,69 @@ namespace program
 
         public static void GamePlaying ()
         {
+
             bool goon = true;
             InterfaceAdapter adf = new InterfaceAdapter();
+            DTOPlayer player1 = adf.GetPlayer(1);
+            DTOPlayer player2 = adf.GetPlayer(2);
+
+            bool player1Turn = true;
+
             while (goon)
             {
                 // game logic here:
                 // first player 1 makes a move then player 2 makes a move until all spaces are used
                 // or 3 crosses or circles in any line is made 
+                if(!board.Contains(null))
+                {
+                    goon = false;
+                }
+                else
+                {
+                    if (player1Turn)
+                    {
+                        // it is the first player to make a move.
+                        int position = ParseNumberFromUserInput();
+                        MakeMove(position, player1.Player1Or2);
+                        player1Turn = false;
+                        drawBoard(board);
 
-                DTOPlayer player1 = adf.GetPlayer(1);
+                    }
+                    else if (!player1Turn)
+                    {
+                        // it is the second player to make a move.
+                        int position = ParseNumberFromUserInput();
+                        MakeMove(position, player2.Player1Or2);
+                        player1Turn = true;
+                        drawBoard(board);
+                    }
+                }
             }
         }
+
+        private static void MakeMove(int positionOnBoard, int playerNumber)
+        {
+            if (board[positionOnBoard] == null)
+            {
+                // legal to make a move here.
+                if(playerNumber == 1)
+                {
+                    board[positionOnBoard] = "X";
+                }
+                else if (playerNumber == 2)
+                {
+                    board[positionOnBoard] = "O";
+                }
+                
+            }
+            else
+            {
+                // illigal move.
+                Console.WriteLine("Cannot make move here as there is a piece already");
+            }
+
+        }
+
         private static void drawBoard (string[] boardStatus)
         {
             
@@ -143,6 +188,21 @@ namespace program
             Console.WriteLine($"|{boardStatus[3]}|{boardStatus[4]}|{boardStatus[5]}|");
 
             Console.WriteLine($"|{boardStatus[6]}|{boardStatus[7]}|{boardStatus[8]}|");
+        }
+
+        private static int ParseNumberFromUserInput()
+        {
+            int number = -1;
+            try
+            {
+                string input = Console.In.ReadLine();
+                number = int.Parse(input);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return number;
         }
     }
 }
