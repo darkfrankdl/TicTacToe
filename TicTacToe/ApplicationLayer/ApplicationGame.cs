@@ -7,10 +7,9 @@ using Domain.AggregateRoot;
 
 namespace ApplicationLayer
 {
-    public class ApplicationGame
+    internal class ApplicationGame
     {
         GameAggregateRoot gameAggregateRoot = new GameAggregateRoot();
-        private static readonly ApplicationGame appGame = new ApplicationGame();
 
         public void CreatePlayer(ApplicationPlayerModel player)
         {
@@ -33,16 +32,6 @@ namespace ApplicationLayer
             }
 
             return player;
-        }
-
-        public static void PlayerInfo(ApplicationPlayerModel player)
-        {
-            appGame.CreatePlayer(player);
-        }
-
-        public static ApplicationPlayerModel GetPlayerInfo(int playerNumber)
-        {
-            return appGame.GetPlayer(playerNumber);
         }
     }
 }

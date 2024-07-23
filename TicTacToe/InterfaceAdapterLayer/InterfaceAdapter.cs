@@ -25,7 +25,7 @@ namespace InterfaceAdapterLayer
 
                 ApplicationPlayerModel player = DTOModelConverter.DTOToApplicationPlayer(playerDto);
                 // send data to the ApplicationLayer
-                ApplicationGame.PlayerInfo(player);
+                GameRepository.GetRepo().AppGame.CreatePlayer(player);
 
                 success = true; // status on player Creation
             }
@@ -38,7 +38,7 @@ namespace InterfaceAdapterLayer
 
         public DTOPlayer GetPlayer (int playerNumber)
         {
-            return DTOModelConverter.ApplcationPlayerToDTO(ApplicationGame.GetPlayerInfo(playerNumber));
+            return DTOModelConverter.ApplcationPlayerToDTO(GameRepository.GetRepo().AppGame.GetPlayer(playerNumber));
         }
     }
 }
