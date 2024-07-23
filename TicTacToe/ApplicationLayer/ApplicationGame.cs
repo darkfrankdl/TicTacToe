@@ -7,7 +7,7 @@ using Domain.AggregateRoot;
 
 namespace ApplicationLayer
 {
-    internal class ApplicationGame
+    public class ApplicationGame
     {
         GameAggregateRoot gameAggregateRoot = new GameAggregateRoot();
 
