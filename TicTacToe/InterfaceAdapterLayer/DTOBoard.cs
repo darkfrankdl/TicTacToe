@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.AggregateRoot
+namespace InterfaceAdapterLayer
 {
-    internal class BoardAggregateRoot
+    public class DTOBoard
     {
+        public int Position { get; set; }
     }
 }

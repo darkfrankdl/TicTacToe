@@ -12,7 +12,7 @@ namespace Domain.Entity
     {
         private Player1 _player1;
         private Player2 _player2;
-
+        private Board _board;
         public Player1 Player1 
         { 
             get
@@ -27,6 +27,17 @@ namespace Domain.Entity
             {
                 return _player2;
             }
+        }
+
+        public bool CreateBoard ()
+        {
+            bool isBoardCreated = false;
+            if (_board == null)
+            {
+                _board = new Board();
+                isBoardCreated = true;
+            }
+            return isBoardCreated;
         }
 
 

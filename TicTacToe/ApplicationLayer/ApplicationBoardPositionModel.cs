@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entity
+namespace ApplicationLayer
 {
-    internal class Piece
+    public class ApplicationBoardPositionModel
     {
-        public string PieceSymbol { get; set; }
+        public int BoardPosition { get; set; }
     }
 }

@@ -33,5 +33,11 @@ namespace ApplicationLayer
 
             return player;
         }
+
+        public bool CreateBoard ()
+        {
+            bool isBoardCreated = gameAggregateRoot.Game.CreateBoard();
+            return isBoardCreated;
+        }
     }
 }

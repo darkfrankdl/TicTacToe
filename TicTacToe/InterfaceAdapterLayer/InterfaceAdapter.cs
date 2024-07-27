@@ -40,5 +40,11 @@ namespace InterfaceAdapterLayer
         {
             return DTOModelConverter.ApplcationPlayerToDTO(GameRepository.GetRepo().AppGame.GetPlayer(playerNumber));
         }
+
+        public bool CreateBoard ()
+        {
+            bool isBoardCreated = GameRepository.GetRepo().AppGame.CreateBoard();
+            return isBoardCreated;
+        }
     }
 }

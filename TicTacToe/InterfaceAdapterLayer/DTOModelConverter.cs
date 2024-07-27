@@ -23,5 +23,19 @@ namespace InterfaceAdapterLayer
             DtoPlayer.Player1Or2 = applicationPlayer.Player1Or2;
             return DtoPlayer;
         }
+
+        public static DTOBoard ApplicationBoardToDTOBoardModel (ApplicationBoardPositionModel appModel)
+        {
+            DTOBoard dto = new DTOBoard();
+            dto.Position = appModel.BoardPosition;
+            return dto;
+        }
+
+        public static ApplicationBoardPositionModel DTOBoardToApplicationBoardModel (DTOBoard dto)
+        {
+            ApplicationBoardPositionModel boardModel = new ApplicationBoardPositionModel ();
+            boardModel.BoardPosition = dto.Position;
+            return boardModel;
+        }
     }
 }
