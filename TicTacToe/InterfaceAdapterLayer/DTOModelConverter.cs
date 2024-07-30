@@ -19,8 +19,13 @@ namespace InterfaceAdapterLayer
 
         public static DTOPlayer ApplcationPlayerToDTO(ApplicationPlayerModel applicationPlayer)
         {
-            DTOPlayer DtoPlayer = new DTOPlayer(applicationPlayer.Name);
-            DtoPlayer.Player1Or2 = applicationPlayer.Player1Or2;
+            DTOPlayer DtoPlayer = null;
+            if (applicationPlayer != null)
+            {
+                DtoPlayer = new DTOPlayer(applicationPlayer.Name);
+                DtoPlayer.Player1Or2 = applicationPlayer.Player1Or2;
+            }
+
             return DtoPlayer;
         }
 

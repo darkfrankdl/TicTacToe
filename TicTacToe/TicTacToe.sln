@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationLayer", "Applica
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterfaceAdapterLayer", "InterfaceAdapterLayer\InterfaceAdapterLayer.csproj", "{867566B0-8F55-44E2-BC27-557723573DA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemTests", "SystemTests\SystemTests.csproj", "{1D1D26A7-8842-4413-8C82-37AACE9D24F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemTests", "SystemTests\SystemTests.csproj", "{1D1D26A7-8842-4413-8C82-37AACE9D24F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

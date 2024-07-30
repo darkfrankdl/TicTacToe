@@ -41,18 +41,22 @@ namespace Domain.Entity
         }
 
 
-        internal void CreatePlayer(string playerName, int playerNumber)
+        internal bool CreatePlayer(string playerName, int playerNumber)
         {
+            bool success = false;
             if(playerNumber == 1)
             {
                 _player1 = new Player1(playerName);
                 _player1.PlayerNumber = playerNumber;
+                success = true;
             }
             else if(playerNumber == 2)
             {
                 _player2 = new Player2(playerName);
                 _player2.PlayerNumber = playerNumber;
+                success = true;
             }
+            return success;
         }
     }
 }

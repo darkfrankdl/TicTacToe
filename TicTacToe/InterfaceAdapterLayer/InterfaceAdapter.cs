@@ -18,22 +18,18 @@ namespace InterfaceAdapterLayer
         public bool CreatePlayer (string name , int number)
         {
             bool success = false;
-            try
+            bool stepStatus = false;
+            DTOPlayer playerDto = new DTOPlayer(name);
+            playerDto.Player1Or2 = number;
+
+            ApplicationPlayerModel player = DTOModelConverter.DTOToApplicationPlayer(playerDto);
+            // send data to the ApplicationLayer
+            stepStatus = GameRepository.GetRepo().AppGame.CreatePlayer(player);
+            if (stepStatus)
             {
-                DTOPlayer playerDto = new DTOPlayer(name);
-                playerDto.Player1Or2 = number;
-
-                ApplicationPlayerModel player = DTOModelConverter.DTOToApplicationPlayer(playerDto);
-                // send data to the ApplicationLayer
-                GameRepository.GetRepo().AppGame.CreatePlayer(player);
-
                 success = true; // status on player Creation
             }
-            catch (Exception ex)
-            {
-                ex = new Exception("Error in creating player, check name or number");
-            }
-           return success;
+            return success;
         }
 
         public DTOPlayer GetPlayer (int playerNumber)

@@ -16,9 +16,9 @@ namespace Domain.AggregateRoot
 
         public Game Game { get; private set; }
 
-        public void CreatePlayer(string playerName, int playerNumber)
+        public bool CreatePlayer(string playerName, int playerNumber)
         {
-            Game.CreatePlayer(playerName, playerNumber);
+           return Game.CreatePlayer(playerName, playerNumber);
         }
     }
 }
