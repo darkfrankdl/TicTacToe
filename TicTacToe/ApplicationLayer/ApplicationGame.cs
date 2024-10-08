@@ -9,7 +9,18 @@ namespace ApplicationLayer
 {
     public class ApplicationGame
     {
-        GameAggregateRoot gameAggregateRoot = new GameAggregateRoot();
+        GameAggregateRoot gameAggregateRoot;
+
+        // used for mock test
+        public ApplicationGame(GameAggregateRoot rootGame)
+        {
+            gameAggregateRoot = rootGame;
+        }
+
+        public ApplicationGame()
+        {
+            gameAggregateRoot = new GameAggregateRoot();
+        }
 
         public bool CreatePlayer(ApplicationPlayerModel player)
         {

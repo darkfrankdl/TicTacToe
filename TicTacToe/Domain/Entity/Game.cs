@@ -41,7 +41,7 @@ namespace Domain.Entity
         }
 
 
-        internal bool CreatePlayer(string playerName, int playerNumber)
+        public bool CreatePlayer(string playerName, int playerNumber)
         {
             bool success = false;
             if(playerNumber == 1)

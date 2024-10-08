@@ -16,7 +16,7 @@ namespace Domain.AggregateRoot
 
         public Game Game { get; private set; }
 
-        public bool CreatePlayer(string playerName, int playerNumber)
+        public virtual bool CreatePlayer(string playerName, int playerNumber)
         {
            return Game.CreatePlayer(playerName, playerNumber);
         }
