@@ -74,5 +74,51 @@ namespace SystemTests
             // assert
             Assert.Null(player);
         }
+
+        [Fact]
+        public void TestMakeMoveX_ExpectTrue()
+        {
+            // arrange
+            InterfaceAdapter interfaceAdapter = new InterfaceAdapter();
+            string XorO = "X";
+            int xPos = 0;
+            int yPos = 0;
+            interfaceAdapter.CreateBoard();
+            // act 
+            bool success = interfaceAdapter.MakeMoveXorO(XorO, xPos, yPos);
+            // assert
+            Assert.True(success);
+        }
+
+        [Fact]
+        public void TestMakeMoveO_ExpectTrue()
+        {
+            // arrange
+            InterfaceAdapter interfaceAdapter = new InterfaceAdapter();
+            string XorO = "O";
+            int xPos = 0;
+            int yPos = 0;
+            interfaceAdapter.CreateBoard();
+            // act 
+            bool success = interfaceAdapter.MakeMoveXorO(XorO, xPos, yPos);
+            // assert
+            Assert.True(success);
+        }
+
+        [Fact]
+        public void TestMakeMoveX_ExpectFalse()
+        {
+            // arrange
+            InterfaceAdapter interfaceAdapter = new InterfaceAdapter();
+            string XorO = "X";
+            int xPos = 0;
+            int yPos = 0;
+            interfaceAdapter.CreateBoard();
+            // act 
+            interfaceAdapter.MakeMoveXorO(XorO, xPos, yPos);
+            bool success = interfaceAdapter.MakeMoveXorO(XorO, xPos, yPos);
+            // assert
+            Assert.False(success);
+        }
     }
 }

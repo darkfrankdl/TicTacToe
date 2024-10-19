@@ -42,5 +42,13 @@ namespace InterfaceAdapterLayer
             bool isBoardCreated = GameRepository.GetRepo().AppGame.CreateBoard();
             return isBoardCreated;
         }
+
+        public bool MakeMoveXorO(string XorO, int xPos, int yPos)
+        {
+            GameRepository repo = GameRepository.GetRepo();
+            ApplicationGame game = repo.AppGame;
+            bool success = game.MakeMoveXorO(XorO, xPos, yPos);
+            return success;
+        }
     }
 }
