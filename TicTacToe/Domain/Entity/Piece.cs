@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entity
 {
-    internal class Piece
+    public class Piece
     {
         public string PieceSymbol { get; set; }
     }

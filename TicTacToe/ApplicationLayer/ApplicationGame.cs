@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.AggregateRoot;
+using Domain.Entity;
 
 namespace ApplicationLayer
 {
@@ -51,6 +52,14 @@ namespace ApplicationLayer
         {
             bool isBoardCreated = gameAggregateRoot.Game.CreateBoard();
             return isBoardCreated;
+        }
+
+        public bool MakeMoveXorO(string XorO, int xPos, int yPos)
+        {
+            Game game = gameAggregateRoot.Game;
+            Board board = game.Board;
+            bool success = board.MakeMoveXorO(XorO, xPos, yPos);
+            return success;
         }
     }
 }

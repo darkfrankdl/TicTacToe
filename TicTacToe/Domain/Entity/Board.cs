@@ -5,25 +5,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain
+namespace Domain.Entity
 {
-    internal class Board
+    public class Board
     {
-        private Piece _X1;
-        private Piece _X2;
-        private Piece _X3;
-        private Piece _X4;
-        private Piece _X5;
-        private Piece _O1;
-        private Piece _O2;
-        private Piece _O3;
-        private Piece _O4;
-
-        private Piece[] pieces;
+        private Piece?[,] _boardState;
 
         public Board()
         {
-            pieces = new Piece[9];
+            _boardState = new Piece?[3,3];
+        }
+
+        public bool MakeMoveXorO(string XorO, int xPos, int yPos)
+        {
+            bool successInMakingMove = false;
+            bool moveOn = true;
+            // verification 
+            string XorO_UpperCase = XorO.ToUpper();
+
+            if(string.IsNullOrEmpty(XorO_UpperCase) || (XorO_UpperCase != "X" && XorO_UpperCase != "O"))
+            {
+                moveOn = false;
+            }
+
+            if (_boardState[yPos, xPos] != null) // not null means that a piece is already there on the board
+            {
+                moveOn = false;
+            }
+
+            if (moveOn) 
+            {
+                Piece piece = new Piece();
+                piece.PieceSymbol = XorO_UpperCase;
+                _boardState[yPos, xPos] = piece;
+                successInMakingMove = true;
+            }
+
+            return successInMakingMove;
         }
     }
 }

@@ -10,33 +10,17 @@ namespace Domain.Entity
 {
     public class Game
     {
-        private Player1 _player1;
-        private Player2 _player2;
-        private Board _board;
-        public Player1 Player1 
-        { 
-            get
-            {
-                return _player1;
-            }
-        }
+        public Player1 Player1 { get; set; }
 
-        public Player2 Player2
-        {
-            get
-            {
-                return _player2;
-            }
-        }
+        public Player2 Player2 { get; set; }
+
+        public Board Board { get; set; }
 
         public bool CreateBoard ()
         {
             bool isBoardCreated = false;
-            if (_board == null)
-            {
-                _board = new Board();
-                isBoardCreated = true;
-            }
+            Board = new Board();
+            isBoardCreated = true;
             return isBoardCreated;
         }
 
@@ -46,14 +30,14 @@ namespace Domain.Entity
             bool success = false;
             if(playerNumber == 1)
             {
-                _player1 = new Player1(playerName);
-                _player1.PlayerNumber = playerNumber;
+                Player1 = new Player1(playerName);
+                Player1.PlayerNumber = playerNumber;
                 success = true;
             }
             else if(playerNumber == 2)
             {
-                _player2 = new Player2(playerName);
-                _player2.PlayerNumber = playerNumber;
+                Player2 = new Player2(playerName);
+                Player2.PlayerNumber = playerNumber;
                 success = true;
             }
             return success;

@@ -22,18 +22,6 @@ namespace UnitTests
         }
 
         [Fact]
-        public void TestCreateBoard_ExpectFalse()
-        {
-            // arrange
-            GameAggregateRoot root = new GameAggregateRoot();
-            root.Game.CreateBoard();
-            // act
-            bool result = root.Game.CreateBoard();
-            // assert
-            Assert.False(result);
-        }
-
-        [Fact]
         public void TestCreatePlayer1_ExpectTrue ()
         {
             //Arrange
@@ -67,6 +55,43 @@ namespace UnitTests
             bool result = game.CreatePlayer("Test", playerNumber);
             //Assert
             Assert.False(result);
+        }
+
+        [Fact]
+        public void TestMakeX_ExpectTrue()
+        {
+            // Arrange 
+            Board board = new Board();
+            // Act
+            bool success = false;
+            success = board.MakeMoveXorO("X",0,0);
+            // Assert
+            Assert.True(success);
+        }
+
+        [Fact]
+        public void TestMakeO_ExpectTrue()
+        {
+            // Arrange 
+            Board board = new Board();
+            // Act
+            bool success = false;
+            success = board.MakeMoveXorO("O", 0, 0);
+            // Assert
+            Assert.True(success);
+        }
+
+        [Fact]
+        public void TestMakeXorO_ExpectFalse()
+        {
+            // Arrange 
+            Board board = new Board();
+            board.MakeMoveXorO("X", 0, 0);
+            // Act
+            bool success = false;
+            success = board.MakeMoveXorO("X", 0, 0);
+            // Assert
+            Assert.False(success);
         }
     }
 }
