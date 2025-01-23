@@ -61,5 +61,14 @@ namespace ApplicationLayer
             bool success = board.MakeMoveXorO(XorO, xPos, yPos);
             return success;
         }
+
+        public ApplicationBoardModel GetBoard()
+        {
+            Game game = gameAggregateRoot.Game;
+            Board board = gameAggregateRoot.Game.Board;
+            ApplicationBoardModel boardModel = new ApplicationBoardModel();
+            boardModel.Board = board;
+            return boardModel;
+        }
     }
 }

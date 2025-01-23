@@ -9,12 +9,14 @@ namespace Domain.Entity
 {
     public class Board
     {
-        private Piece?[,] _boardState;
+        //private Piece?[,] _boardState;
 
         public Board()
         {
-            _boardState = new Piece?[3,3];
+            BoardState = new Piece?[3,3];
         }
+
+        public Piece?[,] BoardState { get; private set; }
 
         public bool MakeMoveXorO(string XorO, int xPos, int yPos)
         {
@@ -28,7 +30,7 @@ namespace Domain.Entity
                 moveOn = false;
             }
 
-            if (_boardState[yPos, xPos] != null) // not null means that a piece is already there on the board
+            if (BoardState[yPos, xPos] != null) // not null means that a piece is already there on the board
             {
                 moveOn = false;
             }
@@ -37,7 +39,7 @@ namespace Domain.Entity
             {
                 Piece piece = new Piece();
                 piece.PieceSymbol = XorO_UpperCase;
-                _boardState[yPos, xPos] = piece;
+                BoardState[yPos, xPos] = piece;
                 successInMakingMove = true;
             }
 

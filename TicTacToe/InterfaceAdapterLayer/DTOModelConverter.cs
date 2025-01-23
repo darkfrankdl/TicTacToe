@@ -1,7 +1,10 @@
 ﻿using ApplicationLayer;
+using Domain.AggregateRoot;
+using Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,17 +32,17 @@ namespace InterfaceAdapterLayer
             return DtoPlayer;
         }
 
-        public static DTOBoard ApplicationBoardToDTOBoardModel (ApplicationBoardPositionModel appModel)
+        public static DTOBoard ApplicationBoardToDTOBoardModel (ApplicationBoardModel appModel)
         {
             DTOBoard dto = new DTOBoard();
-            dto.Position = appModel.BoardPosition;
+            dto.PositionSymbols = new string[3, 3];
             return dto;
         }
 
-        public static ApplicationBoardPositionModel DTOBoardToApplicationBoardModel (DTOBoard dto)
+        public static ApplicationBoardModel DTOBoardToApplicationBoardModel (DTOBoard dto)
         {
-            ApplicationBoardPositionModel boardModel = new ApplicationBoardPositionModel ();
-            boardModel.BoardPosition = dto.Position;
+            ApplicationBoardModel boardModel = new ApplicationBoardModel ();
+            boardModel.BoardPositionSymbols = new string[3,3];
             return boardModel;
         }
     }

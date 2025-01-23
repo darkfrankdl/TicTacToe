@@ -4,7 +4,8 @@ namespace program
 {
     class Program
     {
-        static string[] board = new string[9];
+        static string[,] board = new string[3,3];
+
 
         public static void Main (string[] args)
         {
@@ -64,15 +65,17 @@ namespace program
             InterfaceAdapter adf = new InterfaceAdapter();
             DTOPlayer player1 = adf.GetPlayer(1);
             DTOPlayer player2 = adf.GetPlayer(2);
+            adf.CreateBoard();
+            DTOBoard DTOBoard = adf.GetBoard();
+            board = DTOBoard.PositionSymbols;
 
             bool player1Turn = true;
-
             while (goon)
             {
                 // game logic here:
                 // first player 1 makes a move then player 2 makes a move until all spaces are used
                 // or 3 crosses or circles in any line is made 
-                if(!board.Contains(null))
+                if(CheckIfBoardIsFull(board))
                 {
                     goon = false;
                 }
@@ -82,7 +85,8 @@ namespace program
                     {
                         // it is the first player to make a move.
                         int position = ParseNumberFromUserInput();
-                        MakeMove(position, player1.Player1Or2);
+                        Tuple<int, int> positionXO = SneakyConverter(position);
+                        MakeMove(positionXO, player1.Player1Or2);
                         player1Turn = false;
                         drawBoard(board);
 
@@ -91,7 +95,8 @@ namespace program
                     {
                         // it is the second player to make a move.
                         int position = ParseNumberFromUserInput();
-                        MakeMove(position, player2.Player1Or2);
+                        Tuple<int, int> positionXO = SneakyConverter(position);
+                        MakeMove(positionXO, player2.Player1Or2);
                         player1Turn = true;
                         drawBoard(board);
                     }
@@ -99,18 +104,18 @@ namespace program
             }
         }
 
-        private static void MakeMove(int positionOnBoard, int playerNumber)
+        private static void MakeMove(Tuple<int,int> postion, int playerNumber)
         {
-            if (board[positionOnBoard] == null)
+            if (board[postion.Item1,postion.Item2] == null)
             {
                 // legal to make a move here.
                 if(playerNumber == 1)
                 {
-                    board[positionOnBoard] = "X";
+                    board[postion.Item1, postion.Item2] = "X";
                 }
                 else if (playerNumber == 2)
                 {
-                    board[positionOnBoard] = "O";
+                    board[postion.Item1, postion.Item2] = "O";
                 }
                 
             }
@@ -122,16 +127,16 @@ namespace program
 
         }
 
-        private static void drawBoard (string[] boardStatus)
+        private static void drawBoard (string[,] boardStatus)
         {
             
             Console.WriteLine("-------");
 
-            Console.WriteLine($"|{boardStatus[0]}|{boardStatus[1]}|{boardStatus[2]}|");
+            Console.WriteLine($"|{boardStatus[0,0]}|{boardStatus[1,0]}|{boardStatus[2, 0]}|");
 
-            Console.WriteLine($"|{boardStatus[3]}|{boardStatus[4]}|{boardStatus[5]}|");
+            Console.WriteLine($"|{boardStatus[0,1]}|{boardStatus[1,1]}|{boardStatus[2,1]}|");
 
-            Console.WriteLine($"|{boardStatus[6]}|{boardStatus[7]}|{boardStatus[8]}|");
+            Console.WriteLine($"|{boardStatus[0,2]}|{boardStatus[1,2]}|{boardStatus[2,2]}|");
         }
 
         private static int ParseNumberFromUserInput()
@@ -147,6 +152,74 @@ namespace program
                 Console.WriteLine(e.Message);
             }
             return number;
+        }
+
+        // converts from int to X,Y positions for a [,] array
+        private static Tuple<int,int>? SneakyConverter (int number)
+        {
+            int column = -1;
+            int row = -1;
+            switch (number)
+            {
+                case 0:
+                    column = 0;
+                    row = 0;
+                    break;
+                case 1:
+                    column = 0;
+                    row = 1;
+                    break;
+                case 2:
+                    column = 0;
+                    row = 2;
+                    break;
+                case 3:
+                    column = 1;
+                    row = 0;
+                    break;
+                case 4:
+                    column = 1;
+                    row = 1;
+                    break;
+                case 5:
+                    column = 1;
+                    row = 2;
+                    break;
+                case 6:
+                    column = 2;
+                    row = 0;
+                    break;
+                case 7:
+                    column = 2;
+                    row = 1;
+                    break;
+                case 8:
+                    column = 2;
+                    row = 2;
+                    break;
+            }
+
+            Tuple<int, int> tuple = new Tuple<int, int>(row,column);
+            return tuple;
+        }
+
+        private static bool CheckIfBoardIsFull(string[,] boardState)
+        {
+            bool isFull = false;
+            int numberOfNotNulls = 0;
+            foreach (string s in boardState)
+            {
+                if(s != null)
+                {
+                    numberOfNotNulls++;
+                }
+            }
+            if(numberOfNotNulls == 9)
+            {
+                isFull = true;
+            }
+
+            return isFull;
         }
     }
 }

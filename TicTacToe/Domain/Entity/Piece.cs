@@ -8,6 +8,6 @@ namespace Domain.Entity
 {
     public class Piece
     {
-        public string PieceSymbol { get; set; }
+        public string? PieceSymbol { get; set; }
     }
 }

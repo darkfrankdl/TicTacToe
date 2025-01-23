@@ -50,5 +50,10 @@ namespace InterfaceAdapterLayer
             bool success = game.MakeMoveXorO(XorO, xPos, yPos);
             return success;
         }
+
+        public DTOBoard GetBoard ()
+        {
+            return DTOModelConverter.ApplicationBoardToDTOBoardModel(GameRepository.GetRepo().AppGame.GetBoard());
+        }
     }
 }
