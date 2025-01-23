@@ -14,8 +14,7 @@ namespace program
         private static void Gameflow ()
         {
             Console.WriteLine("*****************Welcome to TicTacToe*****************");
-            //Console.WriteLine("select 1 to play a single game");
-            Console.WriteLine("select 1 -> create players, first player one then player 2");
+            Console.WriteLine("select 1 to play with Demo players");
 
             bool goon = true;
             while (goon)
@@ -28,22 +27,16 @@ namespace program
                     switch (switchInput)
                     {
                         case 1:
-
                             // player 1
-                            int playerNumber1 = PlayerNumber();
-                            string playerName1 = PlayerName();
+                            int playerNumber1 = 1;
+                            string playerName1 = "Joe";
                             MakeAPlayer(playerName1, playerNumber1);
 
                             // player 2
-                            int playerNumber2 = PlayerNumber();
-                            string playerName2 = PlayerName();
+                            int playerNumber2 = 2;
+                            string playerName2 = "Janice";
                             MakeAPlayer(playerName2, playerNumber2);
-
-
-                            drawBoard(new string[9]);
-
-                            break;
-                        case 2:
+                            
                             GamePlaying();
                             break;
                         case 0:
@@ -62,55 +55,6 @@ namespace program
             InterfaceAdapter interfaceAdapter = new InterfaceAdapter();
             bool sus = interfaceAdapter.CreatePlayer(playerName, playerNumber);
             return sus;
-        }
-
-        private static string PlayerName ()
-        {
-            bool goon = true;
-            string inputName = string.Empty;
-            Console.WriteLine("What is this player's name for the game");
-
-            while (goon)
-            {
-                try
-                {
-                    string playerName = Console.In.ReadLine();
-                    if (playerName != null && playerName != string.Empty)
-                    {
-                        inputName = playerName;
-                        goon = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("type something... try again");
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            return inputName;
-        }
-
-        private static int PlayerNumber ()
-        {
-            Console.WriteLine("Game consist of two players, select 1 for player 1 and 2 for player 2");
-            bool goon = true;
-            int numberForPlayer = -1;
-            while (goon)
-            {
-                numberForPlayer = ParseNumberFromUserInput();
-                if (numberForPlayer == null && numberForPlayer != 1 && numberForPlayer != 2)
-                {
-                    Console.WriteLine("Give a number of 1 or 2... try again");
-                }
-                else
-                {
-                    goon = false;
-                }
-            }
-            return numberForPlayer;
         }
 
         public static void GamePlaying ()
